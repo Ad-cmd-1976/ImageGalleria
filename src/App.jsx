@@ -21,7 +21,7 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-        <p className='bg-pink-800'>
+        <p className='bg-slate-800'>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
       </div>
