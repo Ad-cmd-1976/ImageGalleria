@@ -47,11 +47,6 @@ const Navbar = (props) => {
             <button className='bg-blue-700 px-3 rounded-xl py-1 hover:bg-blue-600'>Login</button>
           </div>
         </div>
-    <div className='bg-black text-white flex justify-between gap-2'>
-        <div>Ham</div>
-        <div>Search</div>
-        <div>Login</div>
-    </div>
   </div>
   )
 }
