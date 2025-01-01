@@ -13,22 +13,25 @@ const Navbar = (props) => {
   const changeTheme = (theme) => {
     props.setTheme(!theme);
   };
+  const changeDisplay=()=>{
+    props.setdisplay(!props.display);
+  }
   return (
     <div
       className={`${
         props.theme ? "text-gray-400" : "bg-black text-white"
-      } flex flex-wrap items-center justify-between p-4 gap-1 w-screen`}
+      } flex flex-wrap items-center justify-between p-4 gap-2 border-2 border-green-400`}
     >
-      <div className="flex items-center gap-3">
-        <div className="pt-1">
+      <div className="flex items-center gap-3 sm:max-w-full">
+        <div onClick={changeDisplay} className="pt-1">
           <Ham theme={props.theme} />
         </div>
-        <div>
+        <div className="block">
           <img className="max-h-8 pt-2" src={logo} alt="Error" />
         </div>
       </div>
 
-      <div className="flex flex-grow items-center bg-white border-2 rounded-md max-w-full md:max-w-[50%]">
+      <div className="flex flex-grow items-center bg-white border-2 rounded-md sm:max-w-[50%] max-w-full">
         <Search theme={props.theme} />
         <input
           onChange={handleChange}
@@ -40,11 +43,11 @@ const Navbar = (props) => {
       </div>
 
       <div className="flex flex-wrap items-center gap-4 pt-1 justify-center md:gap-8">
-        <div onClick={() => changeTheme(props.theme)} className="cursor-pointer">
+        <div onClick={() => changeTheme(props.theme)} className="cursor-pointer hidden sm:block">
           <Mode theme={props.theme} />
         </div>
 
-        <div className="hidden md:block">
+        <div className="hidden lg:block">
           <a
             href="#"
             className={`hover:underline-offset-8 hover:underline ${
@@ -54,7 +57,7 @@ const Navbar = (props) => {
             Explore
           </a>
         </div>
-        <div className="hidden md:block">
+        <div className="hidden lg:block">
           <a
             href="#"
             className={`hover:underline-offset-8 hover:underline ${
