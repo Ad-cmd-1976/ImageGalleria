@@ -3,7 +3,7 @@ import React,{useState} from 'react'
 const Sidebar = (props) => {
   const [side, setside] = useState(1)
   return (
-    <div id='sidebar' className={`${props.theme ? "text-gray-400 border-gray-400 bg-gray-50" : "bg-black text-white border-white"} absolute top-16 left-3 w-[30vw] min-h-fit ${props.display?'flex':'hidden'} p-4 justify-around  border-2 rounded-xl gap-1`}>
+    <div id='sidebar' className={`${props.theme ? "text-gray-400 border-gray-400 bg-gray-50" : "bg-black text-white border-white"} absolute top-16 left-3 w-[30vw] min-h-fit ${props.display?'flex':'hidden'} p-4 justify-around  border-2 rounded-xl gap-1 transition-all`}>
         <div id='company'>
             <span className='font-bold'>Company</span>
             <div id='company-section' className='flex flex-col gap-y-2'>
