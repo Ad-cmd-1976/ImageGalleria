@@ -4,6 +4,7 @@ import Line from "../assets/line";
 import Mode from "../assets/mode";
 import Ham from "../assets/hamburger.jsx";
 import Search from "../assets/Search.jsx";
+import { Link } from "react-router-dom";
 
 const Navbar = (props) => {
   const [name, setname] = useState("");
@@ -84,7 +85,7 @@ const Navbar = (props) => {
 
         <div>
           <button className="bg-blue-700 px-3 rounded-xl py-1 hover:bg-blue-600">
-            Login
+            <Link to='/login'>Login</Link>
           </button>
         </div>
       </div>
