@@ -51,53 +51,62 @@ const Signup = () => {
     }
   }
   return (
-    <div className='flex flex-col h-screen justify-center items-center'>
-      <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit} action="" method="post">
+    <div className='flex flex-col gap-8 justify-center items-center h-[80vh] w-[70vw] mx-auto'>
+      <h1 className='font-bold'>Sign Up</h1>
+      <form 
+      onSubmit={handleSubmit} 
+      method="post"
+      className='flex flex-col gap-5'
+      >
         <div>
           <label htmlFor="name">Name</label>
+          <div>
           <input
             onChange={handleChange}
-            className='min-w-fit border-2 rounded-sm'
+            className='border-2 w-96 p-1 pl-2 rounded-md'
             type='text'
             id='name'
-            placeholder='Enter Your Name'
             name='name'
             value={signInfo.name}
           />
+          </div>
         </div>
         <div>
           <label htmlFor="name">Email</label>
+          <div>
           <input
             onChange={handleChange}
-            className='min-w-fit border-2 rounded-sm'
+            className='border-2 w-96 p-1 pl-2 rounded-md'
             type='text'
             id='email'
-            placeholder='Enter Your Email'
             name='email'
             value={signInfo.email}
           />
+          </div>
         </div>
         <div>
           <label htmlFor="name">Password</label>
+          <div>
           <input
             onChange={handleChange}
-            className='min-w-fit border-2 rounded-sm'
+            className='border-2 w-96 p-1 pl-2 rounded-md'
             type='password'
             id='password'
-            placeholder='Enter Your Password'
             name='password'
             value={signInfo.password}
           />
+          </div>
         </div>
+
         <div>
           <button
-          className='w-full border-2' 
+          className='border-2 bg-blue-600 hover:bg-blue-500 rounded-md w-96 py-1' 
           type="submit">
             Sign Up
           </button>
         </div>
-        <span>
+
+        <span className='text-center'>
           Already have an account?{" "}
           <Link to='/login' className='text-blue-600 hover:underline'>
           Login

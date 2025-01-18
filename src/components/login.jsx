@@ -53,43 +53,56 @@ const Login = () => {
   }
   return (
     <div 
-    className='flex flex-col justify-center items-center h-screen'
+    className='flex flex-col gap-8 justify-center items-center h-[80vh] w-[70vw] mx-auto '
     >
-      <h1>Login</h1>
-      <form onSubmit={handlelogin} method="post">
+      <h1 className='font-bold'>Login</h1>
+      <form 
+      onSubmit={handlelogin} 
+      method="post"
+      className='flex flex-col gap-5'
+      >
         <div>
           <label htmlFor="email">Email</label>
+          <div>
           <input 
           onChange={handleChange}
           type="text" 
           name="email" 
           id="email" 
           value={loginInfo.email}
-          className='border-2 min-w-fit'
+          className='border-2 w-96 p-1 pl-2 rounded-md'
+          autoFocus
           />
+          </div>
         </div>
+
         <div>
           <label htmlFor="password">Password</label>
+          <div>
           <input 
           onChange={handleChange}
           type="password" 
           name="password" 
           id="password" 
           value={loginInfo.password}
-          className='border-2 min-w-fit'
+          className='border-2 w-96 p-1 pl-2 rounded-md'
+          autoFocus
           />
+          </div>
         </div>
+
         <div>
           <button 
           type="submit"
-          className='w-full border-2'
+          className='border-2 bg-blue-600 hover:bg-blue-500 rounded-md w-96 py-1'
           >
             Login
           </button>
         </div>
-        <span>
-          Don't have an account {" "}
-          <Link to='/sigup' className='text-blue-600 hover:underline'>Signup</Link>
+
+        <span className='text-center'>
+          Don't have an account? {" "}
+          <Link to='/signup' className='text-blue-600 hover:underline'>Signup</Link>
         </span>
       </form>
       <ToastContainer />

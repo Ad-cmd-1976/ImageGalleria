@@ -17,6 +17,11 @@ const Navbar = (props) => {
   const changeDisplay=()=>{
     props.setdisplay(!props.display);
   }
+  const handleDelete=()=>{
+    localStorage.removeItem('token');
+    localStorage.removeItem('name');
+    props.setisAuthenticated(false);
+  }
   return (
     <div
       className={`${
@@ -85,7 +90,8 @@ const Navbar = (props) => {
 
         <div>
           <button className="bg-blue-700 px-3 rounded-xl py-1 hover:bg-blue-600">
-            <Link to='/login'>Login</Link>
+            {props.isAuthenticated?<span onClick={handleDelete}>Logout</span>:<Link to='/login'>Login</Link>}
+            {/* <Link to='/login'>Login</Link> */}
           </button>
         </div>
       </div>
