@@ -4,13 +4,11 @@ import Line from "../assets/line";
 import Mode from "../assets/mode";
 import Ham from "../assets/hamburger.jsx";
 import Search from "../assets/Search.jsx";
+import { getImages, searchImages } from "../util.jsx";
 import { Link } from "react-router-dom";
 
 const Navbar = (props) => {
-  const [name, setname] = useState("");
-  const handleChange = (e) => {
-    setname(e.target.value);
-  };
+  const [searchVal, setsearchVal] = useState("");
   const changeTheme = (theme) => {
     props.setTheme(!theme);
   };
@@ -22,13 +20,19 @@ const Navbar = (props) => {
     localStorage.removeItem('name');
     props.setisAuthenticated(false);
   }
+  const handleSubmit=async (e)=>{
+    e.preventDefault();
+    const response=await searchImages(searchVal,props.nextCursor);
+    props.setimageList(response.resources);
+    props.setnextCursor(response.next_cursor);
+  }
   return (
     <div
       className={`${
         props.theme ? "text-gray-400" : "bg-black text-white"
-      } flex flex-wrap items-center justify-between p-4 gap-2 border-2 border-green-400`}
+      } flex flex-wrap justify-between p-4 border-2 border-green-400 min-w-screen`}
     >
-      <div className="flex items-center gap-3 sm:max-w-full">
+      <div className="flex items-center gap-3">
         <div onClick={changeDisplay} className="pt-1">
           <Ham theme={props.theme} />
         </div>
@@ -37,42 +41,36 @@ const Navbar = (props) => {
         </div>
       </div>
 
-      <div className="flex flex-grow items-center bg-white border-2 rounded-md sm:max-w-[50%] max-w-full">
+      <form onSubmit={handleSubmit} className="flex gap-2 border-2 border-red-600 w-[70%]">
+        <div className="flex flex-shrink flex-grow items-center bg-white rounded-md w-[65%]">
         <Search theme={props.theme} />
         <input
-          onChange={handleChange}
+          onChange={(e)=>setsearchVal(e.target.value)}
           className="w-full p-1 rounded-md text-gray-400 outline-none"
-          value={name}
+          value={searchVal}
           type="search"
           placeholder="Search Photos and Wallpapers"
         />
-      </div>
-
-      <div className="flex flex-wrap items-center gap-4 pt-1 justify-center md:gap-8">
-        <div onClick={() => changeTheme(props.theme)} className="cursor-pointer hidden sm:block">
-          <Mode theme={props.theme} />
-        </div>
-
-        <div className="hidden lg:block">
-          <a
-            href="#"
-            className={`hover:underline-offset-8 hover:underline ${
-              props.theme ? "decoration-gray-400" : "decoration-white"
-            }`}
-          >
-            Explore
-          </a>
         </div>
         <div className="hidden lg:block">
-          <a
-            href="#"
-            className={`hover:underline-offset-8 hover:underline ${
-              props.theme ? "decoration-gray-400" : "decoration-white"
-            }`}
+          <button
+          className="bg-blue-700 px-3 rounded-xl py-1 hover:bg-blue-600" 
+          type="submit"
           >
-            Advertise
-          </a>
+            Search
+          </button>
         </div>
+        <div className="hidden lg:block">
+              <button
+              onClick={()=>window.location.reload()}
+              className="bg-red-700 px-3 rounded-xl py-1 hover:bg-red-500" 
+              >
+                Refresh
+              </button>
+        </div>
+      </form>
+
+      <div className="flex flex-wrap items-center pt-1 md:gap-6">
         <div className="hidden md:block">
           <a
             href="#"
@@ -84,6 +82,10 @@ const Navbar = (props) => {
           </a>
         </div>
 
+        <div onClick={() => changeTheme(props.theme)} className="cursor-pointer hidden sm:block">
+          <Mode theme={props.theme} />
+        </div>
+
         <div className="hidden md:block">
           <Line theme={props.theme} />
         </div>
@@ -91,7 +93,6 @@ const Navbar = (props) => {
         <div>
           <button className="bg-blue-700 px-3 rounded-xl py-1 hover:bg-blue-600">
             {props.isAuthenticated?<span onClick={handleDelete}>Logout</span>:<Link to='/login'>Login</Link>}
-            {/* <Link to='/login'>Login</Link> */}
           </button>
         </div>
       </div>
